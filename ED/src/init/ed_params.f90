@@ -398,7 +398,7 @@ subroutine init_met_params()
 
    !----- Minimum and maximum acceptable shortwave radiation [W/m�]. ----------------------!
    rshort_min  = 0.
-   rshort_max  = 1500.
+   rshort_max  = 1500. 
    !----- Minimum and maximum acceptable longwave radiation [W/m�]. -----------------------!
    rlong_min   = 40.
    rlong_max   = 600.
