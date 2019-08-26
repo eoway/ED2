@@ -2583,12 +2583,12 @@ subroutine init_pft_alloc_params()
    ! new tropical scheme from MLongo
    if ((iallom == 4) .or. (iallom == 3)) then
        ! SMA
-       !SLA(2:4) = 2000. / exp(1.51 * log(rho(2:4)) + 5.19) ! m2/kgC
-       !Vm0(2:4) = exp(-1.40 * log(rho(2:4)) + 2.78) / vm_q10(2:4) ! umol/m2/s @ 15degC
+       SLA(2:4) = 2000. / exp(1.51 * log(rho(2:4)) + 5.19) ! m2/kgC
+       Vm0(2:4) = exp(-1.40 * log(rho(2:4)) + 2.78) / vm_q10(2:4) ! umol/m2/s @ 15degC
 
        ! OLS
-       SLA(2:4) = 2000. / exp(0.234 * log(rho(2:4)) + 4.52 + 0.5 * 0.154) ! m2/kgC
-       Vm0(2:4) = exp(-0.53 * log(rho(2:4)) + 3.31 + 0.5 * 0.164) / vm_q10(2:4) ! umol/m2/s @ 15degC
+!EO       SLA(2:4) = 2000. / exp(0.234 * log(rho(2:4)) + 4.52 + 0.5 * 0.154) ! m2/kgC
+!EO       Vm0(2:4) = exp(-0.53 * log(rho(2:4)) + 3.31 + 0.5 * 0.164) / vm_q10(2:4) ! umol/m2/s @ 15degC
 
        dark_respiration_factor(2:4) = 0.014
        Rd0(2:4) = dark_respiration_factor(2:4) * Vm0(2:4) * Vm_q10(2:4) / Rd_q10(2:4)
@@ -2779,17 +2779,17 @@ subroutine init_pft_alloc_params()
           
          do ipft=1,n_pft
             if (is_tropical(ipft) .and. (.not. is_liana(ipft))) then
-               ! hgt_ref is used as the coeffient over the second order of ln(D)
+               ! hgt_ref is used as the coefficient over the second order of ln(D)
 
                ! assume the environmental factor is zero for moist tropical forests
-!               b1Ht(ipft) = 0.893
-!               b2Ht(ipft) = 0.76
-!               hgt_ref(ipft) = -0.034
+               b1Ht(ipft) = 0.893
+               b2Ht(ipft) = 0.76
+               hgt_ref(ipft) = -0.034
 
 
                ! old Feldpausch
-               b1Ht   (ipft) = 1.3760
-               b2Ht   (ipft) = 0.4854
+!EO               b1Ht   (ipft) = 1.3760
+!EO               b2Ht   (ipft) = 0.4854
                !----- hgt_ref is not used. ---------------------------------------------------!
                ! hgt_ref(ipft) = 0.0
             end if
@@ -2810,12 +2810,12 @@ subroutine init_pft_alloc_params()
                !----- Regular log-log fit, b1 is the intercept and b2 is the slope. ----------!
 
                ! assume the environmental factor is zero for moist tropical forests
-!               b1Ht(ipft) = 0.893
-!               b2Ht(ipft) = 0.76
-!               hgt_ref(ipft) = -0.034
+               b1Ht(ipft) = 0.893
+               b2Ht(ipft) = 0.76
+               hgt_ref(ipft) = -0.034
                ! Using South America values from the reference
-               b1Ht   (ipft) = 1.519
-               b2Ht   (ipft) = 0.4597
+!EO               b1Ht   (ipft) = 1.519
+!EO               b2Ht   (ipft) = 0.4597
                !----- hgt_ref is not used. ---------------------------------------------------!
                ! hgt_ref(ipft) = 0.0
             end if
@@ -2868,9 +2868,9 @@ subroutine init_pft_alloc_params()
    hgt_min(17)    = 0.50
    !----- Maximum Height. -----------------------------------------------------------------!
    hgt_max( 1) = 1.50
-   hgt_max( 2) = 50.0
-   hgt_max( 3) = 50.0
-   hgt_max( 4) = 50.0
+   hgt_max( 2) = 50.0 
+   hgt_max( 3) = 50.0 
+   hgt_max( 4) = 50.0 
    if (iallom == 4) then
        hgt_max(2:4) = 65.
    endif
