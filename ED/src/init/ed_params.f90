@@ -2782,14 +2782,17 @@ subroutine init_pft_alloc_params()
                ! hgt_ref is used as the coefficient over the second order of ln(D)
 
                ! assume the environmental factor is zero for moist tropical forests
-               b1Ht(ipft) = 0.893
-               b2Ht(ipft) = 0.76
-               hgt_ref(ipft) = -0.034
+               ! b1Ht(ipft) = 0.893     ! EO
+               ! b2Ht(ipft) = 0.76      ! EO
+               ! hgt_ref(ipft) = -0.034 ! EO
 
+               b1Ht(ipft) = 1.2156      ! EO
+               b2Ht(ipft) = 0.5782      ! EO
+               hgt_ref(ipft) = -0.0114  ! EO
 
                ! old Feldpausch
-!EO               b1Ht   (ipft) = 1.3760
-!EO               b2Ht   (ipft) = 0.4854
+               ! b1Ht   (ipft) = 1.3760 ! EO
+               ! b2Ht   (ipft) = 0.4854 ! EO
                !----- hgt_ref is not used. ---------------------------------------------------!
                ! hgt_ref(ipft) = 0.0
             end if
@@ -2814,8 +2817,8 @@ subroutine init_pft_alloc_params()
                b2Ht(ipft) = 0.76
                hgt_ref(ipft) = -0.034
                ! Using South America values from the reference
-!EO               b1Ht   (ipft) = 1.519
-!EO               b2Ht   (ipft) = 0.4597
+               ! b1Ht   (ipft) = 1.519  ! EO
+               ! b2Ht   (ipft) = 0.4597 ! EO
                !----- hgt_ref is not used. ---------------------------------------------------!
                ! hgt_ref(ipft) = 0.0
             end if
@@ -2868,9 +2871,9 @@ subroutine init_pft_alloc_params()
    hgt_min(17)    = 0.50
    !----- Maximum Height. -----------------------------------------------------------------!
    hgt_max( 1) = 1.50
-   hgt_max( 2) = 50.0 
-   hgt_max( 3) = 50.0 
-   hgt_max( 4) = 50.0 
+   hgt_max( 2) = 80 !50.0 EO 
+   hgt_max( 3) = 80 !50.0 EO 
+   hgt_max( 4) = 80 !50.0 EO 
    if (iallom == 4) then
        hgt_max(2:4) = 65.
    endif
@@ -3031,9 +3034,9 @@ subroutine init_pft_alloc_params()
                b1Bl_large (ipft) = exp(-0.5662 + 0.6779 * log(rho(ipft)) + 0.5 * 0.3772)
                b2Bl_large (ipft) = 1.338
                b2Bl_hite  (ipft) = 0.4023
-!               b1Bl_large(ipft) = exp(-1.334 + 0.50 * 0.569)
-!               b2Bl_large(ipft) = 1.178
-!               b2Bl_hite(ipft) = 0.5513
+               !b1Bl_large(ipft) = exp(-1.334 + 0.50 * 0.569)
+               !b2Bl_large(ipft) = 1.178
+               !b2Bl_hite(ipft) = 0.5513
                b1Bl_small (ipft) = b1Bl_large(ipft)
                b2Bl_small (ipft) = b2Bl_large(ipft)
                
@@ -3090,7 +3093,7 @@ subroutine init_pft_alloc_params()
    b1Bs_large(:) = b1Bs_small(:)
    b2Bs_large(:) = b2Bs_small(:)
 
-   ! Coefficiet when height is included in the allometry
+   ! Coefficient when height is included in the allometry
    b2Bs_hite(:)  = 0.0
    !------- Fill in the tropical PFTs, which are functions of wood density. ---------------!
    do ipft = 1, n_pft

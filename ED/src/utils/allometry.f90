@@ -92,13 +92,14 @@ contains
             if (is_tropical(ipft)) then
                mdbh = min(dbh,dbh_crit(ipft))
                select case (iallom)
-                  case (0,1,3,4)
+                  case (0,1)
                      !----- Default ED-2.1 allometry. -------------------------------------!
                      dbh2h = exp (b1Ht(ipft) + b2Ht(ipft) * log(mdbh) )
-!                 case (3,4)
-!                     ! Chave et al. 2014 quadratic equation
-!                     dbh2h = exp ( b1Ht(ipft) + b2Ht(ipft) * log(mdbh)  &
-!                                 + hgt_ref(ipft) * log(mdbh) ** 2)
+                  case (3,4) ! EO
+                     ! Chave et al. 2014 quadratic equation
+                     dbh2h = exp (b1Ht(ipft) + b2Ht(ipft) * log(mdbh) )     ! EO
+                     ! dbh2h = exp ( b1Ht(ipft) + b2Ht(ipft) * log(mdbh)  & ! EO
+                     !             + hgt_ref(ipft) * log(mdbh) ** 2)        ! EO
                   case default
                      !----- Poorter et al. (2006) allometry. ------------------------------!
                      dbh2h = hgt_ref(ipft) * (1. - exp(-b1Ht(ipft) * mdbh ** b2Ht(ipft)))
