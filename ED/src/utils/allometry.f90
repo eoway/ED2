@@ -137,6 +137,7 @@ contains
                              , b1Bs_large  & ! intent(in)
                              , b2Bs_large  & ! intent(in)
                              , b2Bs_hite   & ! intent(in)
+                             , rho         & ! intent(in) ! EO 
                              , is_grass    & ! intent(in)
                              , is_tropical & ! intent(in)
                              , is_liana    ! ! intent(in)
@@ -160,17 +161,21 @@ contains
           .and. is_tropical(ipft) .and. (.not. is_liana(ipft))) then
          !----- Decide parameters based on seedling/adult size. ---------------------------!
          if (dbh <= dbh_crit(ipft)) then
-            size2bd = b1Bs_small(ipft) / C2B * (dbh ** b2Bs_small(ipft)) * (hite ** b2Bs_hite(ipft))
+            size2bd = exp(-2.9205 + 0.9894 * (log(dbh ** 2 * rho(ipft) * hite)))
+         !   size2bd = b1Bs_small(ipft) / C2B * (dbh ** b2Bs_small(ipft)) * (hite ** b2Bs_hite(ipft)) ! EO
          else
-            size2bd = b1Bs_large(ipft) / C2B * (dbh ** b2Bs_large(ipft)) * (hite ** b2Bs_hite(ipft))
+            size2bd = exp(-2.9205 + 0.9894 * (log(dbh ** 2 * rho(ipft) * hite)))
+         !   size2bd = b1Bs_large(ipft) / C2B * (dbh ** b2Bs_large(ipft)) * (hite ** b2Bs_hite(ipft)) ! EO
          end if
          !---------------------------------------------------------------------------------!
       else 
-         !----- Decide parameters baded on the maximum height. ----------------------------!
+         !----- Decide parameters based on the maximum height. ----------------------------!
          if (dbh <= dbh_crit(ipft)) then
             size2bd = b1Bs_small(ipft) / C2B * dbh ** b2Bs_small(ipft)
+         !   size2bd = b1Bs_small(ipft) / C2B * dbh ** b2Bs_small(ipft) ! EO
          else
             size2bd = b1Bs_large(ipft) / C2B * dbh ** b2Bs_large(ipft)
+         !   size2bd = b1Bs_large(ipft) / C2B * dbh ** b2Bs_large(ipft) ! EO
          end if
          !---------------------------------------------------------------------------------!
       end if
