@@ -2871,9 +2871,9 @@ subroutine init_pft_alloc_params()
    hgt_min(17)    = 0.50
    !----- Maximum Height. -----------------------------------------------------------------!
    hgt_max( 1) = 1.50
-   hgt_max( 2) = 80 !50.0 EO 
-   hgt_max( 3) = 80 !50.0 EO 
-   hgt_max( 4) = 80 !50.0 EO 
+   hgt_max( 2) = 70 !50.0 EO 
+   hgt_max( 3) = 70 !50.0 EO 
+   hgt_max( 4) = 70 !50.0 EO 
    if (iallom == 4) then
        hgt_max(2:4) = 65.
    endif
