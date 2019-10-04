@@ -2498,6 +2498,10 @@ subroutine init_pft_alloc_params()
    character(len=str_len), parameter :: allom_file  = 'allom_param.txt'
    !---------------------------------------------------------------------------------------!
 
+   ! put agf_bs in the beginning because we need this value for b1Bs
+   !----- Fraction of structural stem that is assumed to be above ground. -----------------!
+   agf_bs(1:17)   = 0.7
+   !---------------------------------------------------------------------------------------!
 
 
    !----- Check whether to print the allometry table or not. ------------------------------!
@@ -3121,7 +3125,8 @@ subroutine init_pft_alloc_params()
 
             case (3,4)
                 !---- Based on Chave et al. 2014
-                b1Bs_small(ipft) = 0.0673 * exp(0.5 * (0.357 ** 2)) * (rho(ipft) ** 0.976)
+                b1Bs_small(ipft) = 0.0673 * exp(0.5 * (0.357 ** 2)) &
+                                 * (rho(ipft) ** 0.976) / agf_bs(ipft)
                 b2Bs_small(ipft) = 2. * 0.976
                 b1Bs_large(ipft) = b1Bs_small(ipft)
                 b2Bs_large(ipft) = b2Bs_small(ipft)
