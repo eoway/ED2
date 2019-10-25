@@ -353,7 +353,6 @@ subroutine read_ed10_ed20_history_file
                !---------------------------------------------------------------------------!
 
 
-
                !---------------------------------------------------------------------------!
                !      By adding ip only if the area is above minimum, we avoid including   !
                ! patches that are tiny since they will be overwritten by the next patch.   !
@@ -364,7 +363,7 @@ subroutine read_ed10_ed20_history_file
             end do count_patches
             !------------------------------------------------------------------------------!
 
-
+            
 
             !------------------------------------------------------------------------------!
             !      Here we determine the number of patches.  Unless there are no patches,  !
@@ -392,7 +391,9 @@ subroutine read_ed10_ed20_history_file
          end do find_nonwater
          !---------------------------------------------------------------------------------!
 
+         !print*,"npatches = ",npatches ! EO
 
+            
          !---------------------------------------------------------------------------------!
          !     Allocate the patches.                                                       !
          !---------------------------------------------------------------------------------!
